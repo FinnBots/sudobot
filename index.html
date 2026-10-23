@@ -2491,6 +2491,27 @@ if(!HEADLESS){
        when the layer bound (a reload onto a finished run). */
     evaluate();
 
+    /* A PAID SCORE THE PLAYER CAN TRACK (Founder 2026-10-23: "people pay OIL if they dont appear in a leaderboard it either
+       looks sloppy or scammy" ... "we cant drive engagement if there is no visable way to track"). When the paid layer
+       shows its "posted" sheet, say plainly that the run is recorded, when it will show, and where: the boards refresh
+       from the chain about every 15 minutes (factory/auto-scan.sh). The wallet layer is untouched: this only adds a line
+       beside the sheet's own text, once. */
+    try{
+      var sheet = $('postedSheet'), ptext = $('posted-text');
+      if(sheet && ptext){
+        var noteOnce = function(){
+          if(!has(sheet, 'show') || (sheet.querySelector && sheet.querySelector('.fb-posted-note'))) return;
+          var n = document.createElement('p'); n.className = 'fb-posted-note';
+          n.appendChild(document.createTextNode('\u2713 Recorded on the blockchain. Leaderboards refresh about every 15 minutes, so your run will appear there shortly. '));
+          var a = document.createElement('a'); a.href = 'leaderboard.html'; a.textContent = 'See the leaderboard \u2192';
+          n.appendChild(a);
+          ptext.parentNode.insertBefore(n, ptext.nextSibling);
+        };
+        new MutationObserver(noteOnce).observe(sheet, { attributes:true, attributeFilter:['class'] });
+        noteOnce();
+      }
+    }catch(e){}
+
     /* exposed for verify-outro.js: a gate must be able to ask the layer what it
        did, rather than infer it from pixels. Reading it changes nothing. */
     window.FB_OUTRO_STATE = function(){
