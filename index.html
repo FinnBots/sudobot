@@ -2631,7 +2631,7 @@ var FB_FAMILY_CODEC = (function(){
         that only counts while the page is visible and the player touched it
         in the last minute. A tab left open is not play.
         finnstergram.com/parents/ turns that record into the grown-ups' report.
-     2. FAMILY CHALLENGE. The run-over card gets a "Challenge family" button
+     2. FAMILY CHALLENGE. The run-over card gets a "Challenge your family" button
         that shares a link carrying the score and the UTC day: "Can you beat
         my 4,210 on BOTMAN today?". Everybody plays the same seed each day, so
         whoever opens it plays the same run. Opening one shows the target, and
@@ -2792,7 +2792,7 @@ var FB_FAMILY_CODEC = (function(){
     clearLine.textContent = 'Today\u2019s challenge cleared \u2713';
     var share = document.createElement('button');
     share.type = 'button'; share.className = 'fb-fam-share'; share.hidden = true;
-    share.textContent = 'Challenge family';
+    share.textContent = 'Challenge your family';
     var link = document.createElement('input');
     link.className = 'fb-fam-link'; link.readOnly = true; link.hidden = true;
     link.setAttribute('aria-label', 'Challenge link');
@@ -2841,7 +2841,7 @@ var FB_FAMILY_CODEC = (function(){
       if(nav.clipboard && nav.clipboard.writeText){
         nav.clipboard.writeText(text + ' ' + url).then(function(){
           share.textContent = 'Link copied ✓';
-          setTimeout(function(){ share.textContent = 'Challenge family'; }, 2000);
+          setTimeout(function(){ share.textContent = 'Challenge your family'; }, 2000);
         }, showLink);
         return;
       }
